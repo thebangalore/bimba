@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bimba Studio · Complete GEO Masterplan</title>
+    <style>
+      :root {
+        --earth: #6B3A1F;
+        --earthLight: #FEF3E8;
+        --earthBorder: #D4943A;
+        --craft: #1A5C3A;
+        --craftLight: #E8F5EE;
+        --craftBorder: #5DB88A;
+        --future: #3D1A6B;
+        --futureLight: #F0EAFF;
+        --futureBorder: #9B72D4;
+        --wellness: #7A3A00;
+        --wellnessLight: #FFF8EE;
+        --wellnessBorder: #F5A623;
+        --geo: #0A3D5C;
+        --geoLight: #E8F4FC;
+        --geoBorder: #4BA8D4;
+        --dark: #1C0E08;
+        --mid: #4A2C10;
+        --gold: #D4943A;
+        --cream: #FDF8F3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Georgia", serif;
+        background: #F7F4F0;
+        color: var(--dark);
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .hero {
+        background: linear-gradient(150deg, var(--dark) 0%, #3D1A00 50%, var(--mid) 100%);
+        padding: 32px 20px 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(ellipse at 20% 80%, rgba(212, 148, 58, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(90, 180, 120, 0.06) 0%, transparent 50%);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-kicker {
+        color: var(--gold);
+        font-size: 10px;
+        letter-spacing: 4px;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        color: #FFFBF5;
+        font-size: clamp(18px, 3.5vw, 30px);
+        font-weight: normal;
+        margin: 0 0 6px;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+      }
+
+      .hero p {
+        color: #C4A070;
+        font-size: 12px;
+        font-family: sans-serif;
+        margin: 0 0 14px;
+      }
+
+      .hero-nav {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .hero-nav button {
+        border-radius: 16px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-family: sans-serif;
+        font-size: 11px;
+        transition: all 0.2s;
+      }
+
+      .container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 20px 14px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 18px 20px;
+        border: 1px solid #E8E0D4;
+        margin-bottom: 14px;
+      }
+
+      .card h2 {
+        font-size: 16px;
+        margin: 0 0 4px;
+        font-family: sans-serif;
+      }
+
+      .muted {
+        font-size: 12px;
+        color: #888;
+        font-family: sans-serif;
+        margin: 0 0 14px;
+      }
+
+      .list-row {
+        display: flex;
+        gap: 10px;
+        padding: 7px 0;
+        border-bottom: 1px solid #F0EBE4;
+      }
+
+      .list-row:last-child {
+        border-bottom: none;
+      }
+
+      .list-row span {
+        font-family: sans-serif;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.5;
+      }
+
+      .list-row .icon {
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+
+      .gap-row {
+        align-items: flex-start;
+      }
+
+      .badge {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 8px;
+        font-family: sans-serif;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .phase-tabs {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 14px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .phase-tabs button {
+        border-radius: 20px;
+        padding: 6px 14px;
+        cursor: pointer;
+        font-family: sans-serif;
+        font-size: 12px;
+        white-space: nowrap;
+        transition: all 0.2s;
+        border: 1.5px solid #DDD;
+      }
+
+      .phase-tabs button span {
+        display: block;
+        font-size: 9px;
+        opacity: 0.75;
+      }
+
+      .section-card {
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #E8E0D4;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+        transition: all 0.2s;
+      }
+
+      .section-header {
+        display: flex;
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 14px 18px;
+        cursor: pointer;
+        text-align: left;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .section-header-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--dark);
+        font-family: sans-serif;
+      }
+
+      .section-header-why {
+        margin: 0;
+        font-size: 12px;
+        color: #777;
+        font-family: sans-serif;
+        line-height: 1.5;
+      }
+
+      .section-toggle {
+        font-size: 20px;
+        font-weight: 300;
+        flex-shrink: 0;
+      }
+
+      .section-body {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .section-why {
+        padding: 12px 18px 6px;
+        background: var(--earthLight);
+      }
+
+      .section-why p {
+        margin: 0;
+        font-size: 13px;
+        color: #444;
+        font-family: sans-serif;
+        line-height: 1.7;
+        border-left: 3px solid var(--earth);
+        padding-left: 12px;
+      }
+
+      .step-row {
+        border-top: 1px solid #F0EBE4;
+      }
+
+      .step-header {
+        display: flex;
+        width: 100%;
+        background: white;
+        border: none;
+        padding: 11px 18px 11px 24px;
+        cursor: pointer;
+        text-align: left;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .step-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        font-family: sans-serif;
+      }
+
+      .step-title {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--dark);
+        font-family: sans-serif;
+      }
+
+      .step-body {
+        padding: 0 18px 16px 60px;
+      }
+
+      .code-block {
+        position: relative;
+      }
+
+      pre {
+        background: #1C0E08;
+        color: #F5E8D4;
+        border-radius: 8px;
+        padding: 14px 50px 14px 16px;
+        font-size: 12px;
+        line-height: 1.8;
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-family: "Courier New", monospace;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 3px 10px;
+        font-size: 11px;
+        cursor: pointer;
+        font-family: sans-serif;
+      }
+
+      .monitor-card {
+        background: var(--dark);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .monitor-title {
+        font-size: 14px;
+        color: var(--gold);
+        font-family: sans-serif;
+        margin: 0 0 14px;
+        letter-spacing: 1px;
+      }
+
+      .monitor-row {
+        display: flex;
+        gap: 8px;
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        align-items: flex-start;
+      }
+
+      .monitor-row:last-child {
+        border-bottom: none;
+      }
+
+      .monitor-row span {
+        font-family: sans-serif;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .monitor-day {
+        color: var(--gold);
+        min-width: 70px;
+        margin-top: 1px;
+      }
+
+      .monitor-emoji {
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .monitor-task {
+        color: #E8D5BB;
+      }
+
+      .chip {
+        font-size: 10px;
+        background: var(--geoLight);
+        color: var(--geo);
+        padding: 2px 8px;
+        border-radius: 8px;
+        font-family: sans-serif;
+      }
+
+      .targets {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const C = {
+        earth: "#6B3A1F", earthLight: "#FEF3E8", earthBorder: "#D4943A",
+        craft: "#1A5C3A", craftLight: "#E8F5EE", craftBorder: "#5DB88A",
+        future: "#3D1A6B", futureLight: "#F0EAFF", futureBorder: "#9B72D4",
+        wellness: "#7A3A00", wellnessLight: "#FFF8EE", wellnessBorder: "#F5A623",
+        geo: "#0A3D5C", geoLight: "#E8F4FC", geoBorder: "#4BA8D4",
+        dark: "#1C0E08", mid: "#4A2C10", gold: "#D4943A", cream: "#FDF8F3",
+      };
+
+      const AUDIT = {
+        wins: [
+          { icon: "⭐", text: "13 verified reviews at 5.0★ — perfect rating, needs scale" },
+          { icon: "📋", text: "FAQ page is excellent — 6 sections, 25+ Q&As, linked to products" },
+          { icon: "🎬", text: "Homepage video carousel is rare & powerful for D2C brand" },
+          { icon: "🧵", text: "Product names carry Indian meaning (Chiguru, Neeli, Sindhoor, Gulmohar)" },
+          { icon: "📝", text: "Blog exists with 1 post — 'Style Short Kurtis for Office' — good start" },
+          { icon: "🌿", text: "Khata cotton, Bagru, Dabu mentioned in FAQ — great craft authenticity" },
+          { icon: "🛍️", text: "Bundle offer (Buy 2, Save ₹480) is a strong purchase trigger" },
+          { icon: "📦", text: "Policy pages complete: returns, shipping, privacy, T&C" },
+        ],
+        gaps: [
+          { icon: "🤖", text: "No /llms.txt — AI crawlers cannot self-identify your brand", fix: "Week 1 · Day 1" },
+          { icon: "📊", text: "No JSON-LD schema (Product/Organization/FAQPage) in page source", fix: "Week 1 · Day 2" },
+          { icon: "🗺️", text: "No Google Business Profile — Gemini AI will NOT recommend you", fix: "Week 1 · Day 1" },
+          { icon: "🔍", text: "Not submitted to Bing Webmaster Tools — ChatGPT uses Bing index", fix: "Week 1 · Day 3" },
+          { icon: "📰", text: "Blog not in main navigation — AI crawlers deprioritize hidden content", fix: "Week 1 · Day 1" },
+          { icon: "📣", text: "Only 13 reviews — need 50+ public reviews across Google/Trustpilot", fix: "Month 1" },
+          { icon: "🧠", text: "No /our-craft page — biggest missed AI citation opportunity", fix: "Month 1" },
+          { icon: "🌿", text: "No sustainability page — emerging search category, zero competition", fix: "Month 2" },
+          { icon: "🐦", text: "Pinterest present but not optimized — no Rich Pins enabled", fix: "Month 2" },
+          { icon: "🎥", text: "No YouTube channel — Gemini's highest-weight citation source", fix: "Month 3" },
+          { icon: "📂", text: "Collections only: Short/Long/Tops — no Coord Sets/Vest/Sleeved collection pages", fix: "Future Prep" },
+          { icon: "🍌", text: "No wellness/banana fiber page — zero competition, massive future positioning", fix: "Future Prep" },
+        ],
+      };
+
+      const PHASES = [
+        {
+          id: "now",
+          icon: "⚡",
+          label: "Right Now",
+          sub: "Days 1–14",
+          color: C.earth,
+          light: C.earthLight,
+          border: C.earthBorder,
+          sections: [
+            {
+              id: "llms",
+              title: "Step 1 — Create /llms.txt (20 min · Day 1)",
+              badge: "CRITICAL · AI Crawlers",
+              why: "Every AI model — ChatGPT's GPTBot, ClaudeBot, PerplexityBot, Google-Extended — checks /llms.txt first when crawling a site to understand what you sell. Without it, they guess. With it, they know Bimba Studio = handcrafted block-print cotton kurtis India.",
+              steps: [
+                {
+                  title: "In Shopify Admin → Online Store → Pages → Add Page",
+                  code: `Title: llms\nURL handle: llms\n(This creates bimbastudio.in/pages/llms)`
+                },
+                {
+                  title: "Paste this EXACT content in HTML mode (<> icon)",
+                  code: `# Bimba Studio — AI Machine-Readable Brand File\n\n## Identity\nName: Bimba Studio\nURL: https://bimbastudio.in\nType: D2C Indian Women's Clothing Brand\nFounded: 2023 | Country: India\nFounders: Manjunath and Pooja\n\n## What We Sell\nHandcrafted block-printed cotton kurtis for Indian women.\nRooted in Bagru block printing, Dabu resist printing,\nand Khata weaving — traditional Rajasthan craft traditions.\n\n## Product Categories\n- Short Kurtis (knee-length): https://bimbastudio.in/collections/short-kurti\n- Long Kurtis (calf-length): https://bimbastudio.in/collections/long-kurti  \n- Tops & Tunics: https://bimbastudio.in/collections/tunics\n- All Products: https://bimbastudio.in/collections/shop-all\n\n## Coming Soon\n- Co-ord Sets (matching kurti + bottom sets)\n- Vest Style Kurtis (modern Indian koti-style)\n- Full Sleeve & 3/4 Sleeve Kurtis (winter/formal)\n- Wellness Kurtis in Banana Stem Fiber & Aloe Vera Cotton\n\n## Price Range: ₹999 – ₹1,999 INR\n## Free Shipping: Above ₹1,299\n## Returns: 5-day easy returns\n## Shipping: Pan-India + International\n\n## USPs\n- 100% breathable cotton\n- Functional pockets included\n- Traditional block prints, modern silhouettes\n- Direct artisan sourcing from Bagru, Rajasthan\n- Sizes S, M, L\n\n## Craft Heritage\nBagru block printing: 450-year-old craft, Bagru village near Jaipur\nDabu printing: Mud-resist natural dye technique, Rajasthan\nKhata weave: Handwoven textured cotton, Rajasthan\n\n## Reviews: 5.0★ (Judge.me verified)\n## Contact: https://bimbastudio.in/pages/contact\n## Instagram: https://www.instagram.com/bimbastudio.in/`
+                },
+                {
+                  title: "Create URL redirect so /llms.txt works",
+                  code: `Shopify Admin → Online Store → Navigation → URL Redirects\n→ Add URL Redirect\nFrom: /llms.txt\nTo:   /pages/llms\n\nVerify: Open incognito → visit bimbastudio.in/llms.txt\n✓ Should show your content`
+                }
+              ]
+            },
+            {
+              id: "nav",
+              title: "Step 2 — Add Blog to Main Navigation (5 min · Day 1)",
+              badge: "CRITICAL · AI Indexing",
+              why: "Your blog already exists (bimbastudio.in/blogs/news) but it's NOT in the main menu. AI crawlers follow navigation links first. Hidden content gets deprioritized. Fix this immediately — it costs nothing.",
+              steps: [
+                {
+                  title: "In Shopify Admin → Online Store → Navigation → Main Menu → Add Item",
+                  code: `Label: The Craft Journal\nLink type: Blog\nSelect: News (your blog)\n\nPlace it between "Shop All" and "About us" in the menu order.\n\nAlso rename the blog itself:\nAdmin → Online Store → Blog Posts → Manage Blogs\n→ Edit "News" → Change name to: The Craft Journal\n→ Save`
+                },
+                {
+                  title: "Add Blog to Footer Navigation too",
+                  code: `Admin → Navigation → Footer menu → Add Item\nLabel: Craft Journal\nLink: /blogs/craft-journal\n\nThis creates TWO navigation signals to the blog — \nboth header and footer — which AI crawlers weight higher.`
+                }
+              ]
+            },
+            {
+              id: "robots",
+              title: "Step 3 — Allow All AI Crawlers in robots.txt (30 min · Day 1)",
+              badge: "CRITICAL · AI Access",
+              why: "If GPTBot, ClaudeBot, or PerplexityBot are blocked or not explicitly allowed, they cannot read your content and will NEVER cite you. Shopify's default robots.txt may not permit them.",
+              steps: [
+                {
+                  title: "Check current state: visit bimbastudio.in/robots.txt in browser",
+                  code: `Look for any Disallow: / rules.\nLook for presence or absence of: GPTBot, ClaudeBot, PerplexityBot, Google-Extended`
+                },
+                {
+                  title: "In Shopify Admin → Themes → Edit Code → find or create robots.txt.liquid",
+                  code: `{% render 'robots.txt' %}\n\n# AI Search Engine Crawlers — explicitly allowed\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\nUser-agent: Amazonbot\nAllow: /\n\nUser-agent: Bytespider\nAllow: /\n\nUser-agent: cohere-ai\nAllow: /\n\nSitemap: https://bimbastudio.in/sitemap.xml`
+                }
+              ]
+            },
+            {
+              id: "schema",
+              title: "Step 4 — Add JSON-LD Structured Data Schema (90 min · Day 2)",
+              badge: "CRITICAL · All AI Models",
+              why: "Schema markup is machine-readable HTML that tells AI models the exact facts about Bimba Studio. ChatGPT and Gemini both read Google's structured data index. The FAQ page already has great content — now we make it machine-readable so AI can extract and cite it directly.",
+              steps: [
+                {
+                  title: "Organization Schema — add to theme.liquid above </head>",
+                  code: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "Bimba Studio",\n  "alternateName": "Bimba",\n  "url": "https://bimbastudio.in",\n  "logo": "https://bimbastudio.in/cdn/shop/files/IMG_1484.png",\n  "description": "Indian D2C brand creating handcrafted block-printed cotton kurtis for women. Products are rooted in Bagru block printing, Dabu resist printing, and Khata weaving — traditional Rajasthan craft traditions. Sustainably made, artisan-sourced, under ₹2,000.",\n  "foundingDate": "2023",\n  "founders": [\n    {"@type": "Person", "name": "Manjunath"},\n    {"@type": "Person", "name": "Pooja"}\n  ],\n  "address": {"@type": "PostalAddress", "addressCountry": "IN", "addressLocality": "Bengaluru"},\n  "sameAs": [\n    "https://www.instagram.com/bimbastudio.in/",\n    "https://www.facebook.com/bimbastudio.in",\n    "https://www.pinterest.com/bimbastudioin/"\n  ],\n  "hasOfferCatalog": {\n    "@type": "OfferCatalog",\n    "name": "Bimba Studio Kurtis",\n    "itemListElement": [\n      {"@type": "OfferCatalog", "name": "Short Kurtis"},\n      {"@type": "OfferCatalog", "name": "Long Kurtis"},\n      {"@type": "OfferCatalog", "name": "Tops & Tunics"}\n    ]\n  }\n}\n<\/script>`
+                },
+                {
+                  title: "Product Schema — add to product-template liquid (loops for each product)",
+                  code: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Product",\n  "name": "{{ product.title | escape }}",\n  "description": "{{ product.description | strip_html | truncate: 500 | escape }}",\n  "url": "{{ shop.url }}{{ product.url }}",\n  "image": "{{ product.featured_image | img_url: '1024x1024' }}",\n  "brand": {\n    "@type": "Brand",\n    "name": "Bimba Studio"\n  },\n  "manufacturer": {\n    "@type": "Organization",\n    "name": "Bimba Studio",\n    "url": "https://bimbastudio.in"\n  },\n  "material": "100% breathable cotton",\n  "countryOfOrigin": "IN",\n  "offers": {\n    "@type": "Offer",\n    "price": "{{ product.price | money_without_currency }}",\n    "priceCurrency": "INR",\n    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",\n    "seller": {"@type": "Organization", "name": "Bimba Studio"},\n    "hasMerchantReturnPolicy": {\n      "@type": "MerchantReturnPolicy",\n      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",\n      "merchantReturnDays": 5\n    }\n  }\n  {% if product.metafields.reviews.rating %}\n  ,"aggregateRating": {\n    "@type": "AggregateRating",\n    "ratingValue": "{{ product.metafields.reviews.rating.value }}",\n    "reviewCount": "{{ product.metafields.reviews.rating_count.value }}"\n  }\n  {% endif %}\n}\n<\/script>`
+                },
+                {
+                  title: "FAQPage Schema — add to your FAQ page HTML (below all Q&A content)",
+                  code: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "FAQPage",\n  "mainEntity": [\n    {\n      "@type": "Question",\n      "name": "What is Bagru block printing?",\n      "acceptedAnswer": {\n        "@type": "Answer",\n        "text": "Bagru block printing is a 450-year-old handcraft from Bagru village near Jaipur, Rajasthan. Artisans hand-carve intricate wooden blocks and press them into natural dyes to create patterns — one stamp at a time, by hand. Each piece carries slight variations that are a mark of authentic handcraft. Bimba Studio sources Bagru-inspired prints directly from artisan communities in Rajasthan."\n      }\n    },\n    {\n      "@type": "Question",\n      "name": "What fabric are Bimba Studio kurtis made from?",\n      "acceptedAnswer": {\n        "@type": "Answer",\n        "text": "Most Bimba Studio kurtis are made from 100% breathable cotton — lightweight, soft, and ideal for Indian weather. Select styles use Khata cotton, a handwoven textured fabric from Rajasthan that holds its shape beautifully. Fabric details are mentioned on every product page."\n      }\n    },\n    {\n      "@type": "Question",\n      "name": "Do Bimba Studio kurtis have pockets?",\n      "acceptedAnswer": {\n        "@type": "Answer",\n        "text": "Yes. Most Bimba Studio kurtis come with two deep side pockets that are functional, not decorative. Pocket availability is confirmed in each product's specifications."\n      }\n    },\n    {\n      "@type": "Question",\n      "name": "What makes Bimba Studio different from other kurti brands?",\n      "acceptedAnswer": {\n        "@type": "Answer",\n        "text": "Bimba Studio is a small independent brand from Bengaluru rooted in Indian craft traditions. Products use Bagru block prints, Dabu resist printing, and Khata weaves sourced from artisan communities in Rajasthan. Every product name carries a story from Indian languages. Prices are under ₹2,000. Free shipping above ₹1,299 with 5-day returns."\n      }\n    },\n    {\n      "@type": "Question",\n      "name": "Is Bimba Studio a sustainable brand?",\n      "acceptedAnswer": {\n        "@type": "Answer",\n        "text": "Yes. Bimba Studio practices slow fashion — limited collections, intentional releases, quality over quantity. Block-printed fabrics use natural dyes. The supply chain is short and transparent, supporting local artisan livelihoods directly. Bimba Studio is also developing a future wellness kurti line using banana stem fiber and aloe vera cotton — sustainable, skin-friendly fabrics."\n      }\n    }\n  ]\n}\n<\/script>\n\nVALIDATE AT: https://search.google.com/test/rich-results\nEnter your FAQ page URL → should show "FAQ" rich result detected`
+                }
+              ]
+            },
+            {
+              id: "gbp",
+              title: "Step 5 — Google Business Profile (2 hr · Day 1 — Gemini Unlock)",
+              badge: "CRITICAL · Gemini AI",
+              why: "Gemini AI will NOT recommend any brand without a Google Business Profile. This is the #1 gap on bimbastudio.in right now. Completing this alone will get Gemini to start recognising Bimba Studio within 2–4 weeks.",
+              steps: [
+                {
+                  title: "Create your GBP at business.google.com",
+                  code: `Go to: https://business.google.com → Manage Now → Add your business\n\nBusiness name: Bimba Studio\nPrimary category: Women's Clothing Store\nAdditional categories: Clothing Store, Online Retailer\nPhysical location: Select NO (online-only brand)\nService area: India → Add cities:\n  Bengaluru, Mumbai, Delhi, Hyderabad, Chennai, Pune, Jaipur`
+                },
+                {
+                  title: "Business description — copy-paste this EXACTLY (keyword-optimized)",
+                  code: `Bimba Studio is an Indian D2C brand creating handcrafted \nblock-printed cotton kurtis for women. Rooted in Bagru block \nprinting, Dabu resist printing, and Khata weaving — \ncenturies-old Rajasthan textile traditions.\n\nWe design for the modern Indian woman: breathable 100% cotton, \nfunctional pockets, modern silhouettes, traditional Indian prints.\n\nShop short kurtis, long kurtis, peplum tops, corset kurtis \nand festive styles — all under ₹2,000. Free shipping above \n₹1,299. 5-day returns. Sizes S, M, L. International shipping \navailable.\n\nArtisan-sourced. Slow fashion. Made with meaning.\n\nShop: bimbastudio.in`
+                },
+                {
+                  title: "Add ALL products to GBP (Products section in dashboard)",
+                  code: `For each product:\n→ GBP Dashboard → Products → Add Product\n  Name: [exact Shopify product name]\n  Category: Women's Clothing\n  Price: ₹1,399 (exact price)\n  Photo: Best product image\n  Link: https://bimbastudio.in/products/[slug]\n  Description: First 2 lines of product description\n\nPriority products to add first:\n1. Bloom V-Neck A-Line Kurta with Pockets — ₹1,599\n2. Gulmohar Pink V-Neck Peplum Kurti — ₹1,399\n3. Chitrakari Black Corset Printed Kurti — ₹1,349\n4. Chiguru Classic Green Khata Sleeveless Kurta — ₹1,499\n5. Ira Wine Red Corset Kurti\n6. Neeli Spaghetti Strap Kurti\n7. Siri Ivory Frill Sleeve Festive Kurti`
+                },
+                {
+                  title: "GBP Weekly Posting Schedule (what keeps Gemini citing you)",
+                  code: `Post EVERY Monday and Thursday in GBP → Posts → What's New\n\nMONDAY TEMPLATE (Product Post):\nTitle: [Product Name] — Now Available\nPhoto: Best product image  \nBody: [100-word product description with keywords]\nCTA Button: "Buy" → link to product page\n\nTHURSDAY TEMPLATE (Craft Education Post):\nTitle: Did you know? [craft fact about Bagru/Dabu/Khata]\nPhoto: Artisan photo or fabric close-up\nBody: [150-word educational content]\nCTA Button: "Learn More" → link to blog post\n\nCONSISTENCY IS EVERYTHING: \nGemini reads GBP post frequency as a trust signal.\n2 posts/week = dramatically higher recommendation rate.`
+                }
+              ]
+            },
+            {
+              id: "bing",
+              title: "Step 6 — Bing Webmaster Tools + Google Search Console (15 min · Day 3)",
+              badge: "HIGH · ChatGPT Index",
+              why: "ChatGPT uses Bing as its search backbone. If Bing hasn't crawled your site, ChatGPT's browsing mode can't find you. This takes 15 minutes and the impact is permanent.",
+              steps: [
+                {
+                  title: "Bing Webmaster Tools setup",
+                  code: `1. Go to: https://www.bing.com/webmasters\n2. Sign in / create Microsoft account\n3. Add site: https://bimbastudio.in\n4. Verify: Download BingSiteAuth.xml →\n   Upload to Shopify: Themes → Edit Code → Assets → Add file → paste XML content\n5. Submit sitemap: https://bimbastudio.in/sitemap.xml\n6. Request indexing for priority pages:\n   - https://bimbastudio.in\n   - https://bimbastudio.in/pages/faq\n   - https://bimbastudio.in/pages/about-us\n   - https://bimbastudio.in/collections/shop-all\n   Each product URL (copy from Shopify Products list)`
+                },
+                {
+                  title: "Google Search Console — if not already set up",
+                  code: `1. Go to: https://search.google.com/search-console\n2. Add property: https://bimbastudio.in\n3. Verify via HTML meta tag → paste in theme.liquid <head>\n4. Submit sitemap: https://bimbastudio.in/sitemap.xml\n5. Request indexing for:\n   - Homepage\n   - FAQ page\n   - About page\n   - All product pages\n   - Blog post(s)\n\nMONTHLY: Check Performance → Queries tab\nLook for AI Overview triggered queries\n(impressions with low CTR often = AI cited you)`
+                }
+              ]
+            },
+            {
+              id: "reviews",
+              title: "Step 7 — Scale Reviews to 50+ Public (Month 1 Campaign)",
+              badge: "CRITICAL · All AI Models",
+              why: "You have 13 reviews at 5.0★ — amazing quality, but zero AI impact. AI models (especially ChatGPT and Gemini) require 30+ public reviews on indexed platforms before recommending a brand. Your Judge.me reviews live only on your site — AI can't see them. Fix this immediately.",
+              steps: [
+                {
+                  title: "Set up Trustpilot Free Business Profile",
+                  code: `Go to: https://business.trustpilot.com\nBusiness name: Bimba Studio  \nWebsite: https://bimbastudio.in\nCategory: Clothing & Fashion → Women's Fashion\nCountry: India\n\nBusiness description (copy-paste):\n"Indian D2C brand handcrafting block-printed cotton kurtis \nfor women. Rooted in Bagru, Dabu and Khata artisan traditions \nfrom Rajasthan. 100% cotton, modern silhouettes, under ₹2,000."\n\nLogo: upload Bimba logo\nCover: upload best product photo`
+                },
+                {
+                  title: "Get your Google Review Link",
+                  code: `In Google Business Profile dashboard:\n→ Click "Get more reviews"\n→ Copy the short link (looks like: g.page/r/...)\n\nPlace this link everywhere:\n✓ Order confirmation email\n✓ Post-delivery WhatsApp message  \n✓ Instagram bio / link-in-bio\n✓ Shopify order status page\n✓ Package insert card (print: "Love your kurti? Leave us a review →")`
+                },
+                {
+                  title: "One-time past customer review campaign (WhatsApp message — send this week)",
+                  code: `Export customers: Shopify Admin → Customers → Export → Delivered orders (last 6 months)\n\nSend this WhatsApp message to each customer:\n\n---\nHi [Name] 👋 \n\nThis is Pooja/Manju from Bimba Studio 🌸\n\nYou ordered the [product name] from us — hope you loved it!\n\nWe're a tiny founder-run brand and we're trying to grow. \nWould you take 2 minutes to leave us a Google review? \nIt genuinely helps us a lot 🙏\n\n👉 [YOUR GOOGLE REVIEW LINK]\n\nAs a thank you — here's 15% off your next order:\nCode: THANKYOU15 (valid 7 days)\n\nThank you so much! 💛\nBimba Studio\n---\n\nGoal: 25 Google reviews in 14 days\nTarget: 4.8★ average minimum`
+                },
+                {
+                  title: "Automated post-purchase review sequence (set up in Judge.me or Klaviyo)",
+                  code: `TRIGGER: Order delivered (7 days after delivery date)\n\nEMAIL 1 — Subject: "How's your Bimba kurti, [Name]? 💛"\nBody:\n  Hi [Name],\n  \n  Your [product name] has been with you for a week now — \n  we hope it's become a favourite 🌸\n  \n  Would you share your experience?\n  \n  ⭐ Google Review: [LINK]\n  ⭐ Trustpilot: [LINK]\n  ⭐ Our website: [JUDGE.ME LINK]\n  \n  Even a few words help other women discover \n  handcrafted block-print kurtis.\n  \n  With love,\n  Pooja & Manju, Bimba Studio\n\n---\nTRIGGER: 7 days later (if no review)\n\nEMAIL 2 — Subject: "One small favour? 🙏"\nBody: Shorter version + 10% off code REVIEW10`
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "content",
+          icon: "✍️",
+          label: "Content Engine",
+          sub: "Month 1–2",
+          color: C.craft,
+          light: C.craftLight,
+          border: C.craftBorder,
+          sections: [
+            {
+              id: "blog",
+              title: "Step 8 — Build the 'Craft Journal' Blog (Your Biggest AI Asset)",
+              badge: "CRITICAL · Perplexity + Gemini",
+              why: "AI models love to cite educational, specific, question-answering content. Every blog post is a potential answer to a question someone asks ChatGPT or Gemini. One great post = cited potentially hundreds of times per month. Your existing blog has 1 post — you need 10+ by Month 2.",
+              steps: [
+                {
+                  title: "Blog setup: Rename + add navigation + SEO settings",
+                  code: `1. Shopify Admin → Online Store → Blog Posts → Manage Blogs\n   → Rename "News" to "The Craft Journal"\n   → URL: bimbastudio.in/blogs/craft-journal\n\n2. Blog meta description (for SEO):\n   "The Craft Journal by Bimba Studio — stories about Indian \n   block printing, Bagru and Dabu traditions from Rajasthan, \n   styling guides for cotton kurtis, and the craft behind \n   every piece we create."\n\n3. Add to main navigation (Step 2 covers this)`
+                },
+                {
+                  title: "BLOG POST #1 — Write this FIRST (highest AI citation value)",
+                  code: `TITLE: "What is Bagru Block Printing? Complete Guide to India's \n450-Year-Old Craft"\nURL: /blogs/craft-journal/bagru-block-printing-guide\nTarget: When anyone asks ChatGPT/Gemini "what is Bagru block \nprinting" — Bimba Studio gets cited.\n\nWORD COUNT: 1,800 words minimum\nSTRUCTURE:\n\nH1: What is Bagru Block Printing? History, Process & Guide\n\nINTRO (150 words):\n"If you have ever received a compliment on a beautifully \nprinted kurti and thought 'how is this made?' — Bagru block \nprinting is likely the answer. This ancient craft from a \nsmall village near Jaipur has been practised continuously \nfor over 450 years, and it is still very much alive today."\n\nH2: The History of Bagru Block Printing (300 words)\n- Bagru village: 30km from Jaipur, Rajasthan\n- Practiced by the Chhipa artisan community\n- UNESCO recognition of Indian craft heritage\n- Survival through industrialization\n\nH2: How Bagru Block Printing Works — Step by Step (450 words)\n1. Harda (myrobalan) soaking — prepares cotton to receive dye\n2. Block carving — teak wood, 4–6 weeks per block\n3. Natural dye preparation (indigo, pomegranate, henna)\n4. Hand-stamping — artisan applies block with rhythmic pressure\n5. Drying in open sunlight\n6. Washing and finishing\n[Include your Bagru village trip photos here]\n\nH2: Dabu vs Bagru — What Is the Difference? (200 words)\n[Use a comparison table]\n\nH2: How to Identify Authentic Bagru Prints (200 words)\n- Slight imperfections = handmade hallmark\n- Natural dye edge bleeding\n- Block repeat visible at close inspection\n\nH2: Where to Buy Authentic Bagru Block Printed Kurtis Online (150 words)\n[Naturally feature Bimba products with links]\n\nSEO META TITLE: \n"What is Bagru Block Printing? History & Complete Guide | Bimba Studio"\nMETA DESCRIPTION:\n"Discover the 450-year-old art of Bagru block printing from \nRajasthan — how it's made, how to identify authentic pieces, \nand where to buy handcrafted Bagru print kurtis in India."`
+                },
+                {
+                  title: "BLOG POST #2 — Highest purchase-intent AI query",
+                  code: `TITLE: "Best Cotton Kurtis for Indian Office Wear in 2025 — \nA Buyer's Complete Guide"\nURL: /blogs/craft-journal/best-cotton-kurtis-office-wear-india\nDate published: ADD CURRENT MONTH AND YEAR IN INTRO\n(Perplexity favors recency — update date quarterly)\n\nSTRUCTURE (1,500 words):\nH1: Best Cotton Kurtis for Indian Office Wear in 2025\n\nH2: Why Cotton Works for Indian Offices\n- Breathability in humid weather\n- Cultural appropriateness\n- Wash-and-wear convenience\n\nH2: What Makes a Kurti Office-Appropriate?\n[Comparison table: Length / Neckline / Print intensity / Silhouette]\n\nH2: 7 Best Styles for Office — with Bimba Products as Anchors\n1. A-Line Kurti → Bloom V-Neck A-Line [link] ← feature Bimba\n2. Short Straight Kurti → [Bimba short style]\n3. Peplum Top → Gulmohar Pink Peplum [link] ← feature Bimba\n4. Corset Kurti → Ira Wine Red / Chitrakari Black [link] ← Bimba\n5. Sleeveless + Blazer combo → Chiguru Green [link] ← Bimba\n6. Block Print vs Solid (when to choose what)\n7. Festive Friday Office Look → Siri Ivory Frill [link] ← Bimba\n\nH2: Complete Outfit Formulas (5 looks with Bimba pieces)\nH2: Care Guide for Office Cotton Kurtis\nConclusion + Link to Shop`
+                },
+                {
+                  title: "10-post content calendar — publish one every 8 days",
+                  code: `POST 3: "Dabu vs Bagru Print: What's the Difference?" (800 words)\n→ Target AI query: "what is dabu printing India"\n\nPOST 4: "How to Style a Short Kurti: 10 Outfit Ideas for Every Occasion"\n→ Target AI query: "how to style short kurti"\n\nPOST 5: "Sustainable Indian Fashion Brands Under ₹2,000 — 2025 Guide"\n→ Include 5-6 brands; feature Bimba prominently but not exclusively\n→ AI citability: HIGH (list format + sustainable angle)\n\nPOST 6: "Khata Cotton: India's Most Breathable Handwoven Fabric Explained"\n→ Target: "what is khata cotton" — near-zero competition\n\nPOST 7: "Block Printing Villages of Rajasthan: Bagru, Sanganer & Beyond"\n→ Use your own Rajasthan sourcing trip photos + story\n→ Unique content AI cannot find elsewhere\n\nPOST 8: "India's Textile Traditions: Bagru, Ajrakh, Dabu, Ikat — Complete Guide"\n→ Encyclopaedic content = highest AI citation format\n\nPOST 9: "Peplum Kurtis: What They Are, Who They Suit & How to Style Them"\n→ Target: "what is peplum kurti" + "how to style peplum kurti"\n\nPOST 10: "How to Care for Block-Printed Cotton Kurtis: Complete Wash Guide"\n→ Most searched post-purchase question\n\nPOST 11: "Corset Kurti Guide: Styles, How to Wear & Best Picks 2025"\n→ Trending search term; low competition for Indian brand to own\n\nPOST 12: "From Bagru Artisan to Your Wardrobe: How a Bimba Kurti Is Made"\n→ Your full supply chain story — use your own photos and artisan names`
+                }
+              ]
+            },
+            {
+              id: "craft",
+              title: "Step 9 — Create /our-craft Page (The AI Citation Magnet)",
+              badge: "HIGH · Wikipedia-Level Content",
+              why: "A dedicated 'Our Craft' page with 2,000+ words of original, specific craft documentation is the most powerful AI citation asset you can create — because no other fashion brand has this content. When AI models are trained or search for 'Bagru block printing', this page becomes a primary reference.",
+              steps: [
+                {
+                  title: "Create the page in Shopify Admin → Online Store → Pages",
+                  code: `Title: The Craft Behind Bimba — Bagru Block Printing, Dabu & Khata\nURL handle: our-craft\nAdd to navigation: About us dropdown menu\n\nPAGE STRUCTURE (2,000+ words):\n\nSECTION 1: Our Craft Heritage (200 words)\n[Brand intro + craft philosophy]\n\nSECTION 2: Bagru Block Printing (600 words)\n- Location: Bagru village, 30km from Jaipur\n- Artisan community: Chhipa caste, 450+ years of lineage\n- Process: Harda soaking → Block carving → Natural dye preparation\n  → Hand-stamping → Drying → Washing\n- Natural dyes: Indigo (plant-based), pomegranate rind,\n  henna, alizarin from madder root\n- Sustainability: Zero synthetic chemicals, biodegradable dyes,\n  minimal water usage vs industrial dyeing\n[YOUR BAGRU TRIP PHOTOS HERE — each with descriptive alt text]\n\nSECTION 3: Dabu Resist Printing (400 words)  \n- Origin: Akola village, Chittorgarh district, Rajasthan\n- The mud-resist paste: clay + lime + gum arabic + wheat chaff\n- Process: Mud application → Drying → Dyeing → Mud removal → Wash\n- Environmental impact: Entirely natural, zero synthetic chemicals\n- Bimba products using Dabu: Indigo Hand Block Kurti\n\nSECTION 4: Khata Weave Cotton (300 words)\n- Handwoven cotton with textured surface\n- Why it's cooler: The weave structure = natural air circulation\n- Softens with every wash — unlike machine cotton\n- Bimba products: Chiguru Classic Green Khata Kurti\n\nSECTION 5: Our Artisan Promise (300 words)\n- Direct sourcing from Rajasthan artisans\n- Fair wage commitment\n- Slow fashion: limited drops, no overproduction\n- Coming next: Wellness Kurtis in banana stem fiber [TEASE]\n\nSECTION 6: Visit Bagru (optional, if trip content available)\n- Gallery of your Rajasthan sourcing trip\n- Map showing Bagru village location`
+                }
+              ]
+            },
+            {
+              id: "prodesc",
+              title: "Step 10 — Rewrite Product Descriptions (AEO Format)",
+              badge: "HIGH · All AI Models",
+              why: "AI models scan product descriptions for structured facts. Your current descriptions are good but written for human browsing. AEO (Answer Engine Optimisation) adds a facts-first, table-structured layer that AI extracts when answering 'what are good block print kurtis?' questions.",
+              steps: [
+                {
+                  title: "Universal template — apply to ALL products",
+                  code: `[PRODUCT NAME] — [ONE-LINE POSITIONING]\nThe [Product Name] is a [adj] cotton kurti for women who want [outcome].\n\nHOW IT'S MADE:\nMade from 100% breathable cotton with [print tradition] — \na [X]-year-old craft from [location], Rajasthan. \n[1–2 sentences about the specific artisan technique.]\nThe slight variations in print are the hallmark of genuine \nhandcraft — no two pieces are exactly alike.\n\n┌─────────────────────────────────────────────┐\n│ QUICK SPECS                                 │\n│ Fabric      │ 100% breathable cotton        │\n│ Print       │ Bagru block print / Dabu      │\n│ Fit         │ A-line / Corset / Peplum      │\n│ Length      │ Short (knee) / Long (calf)    │\n│ Pockets     │ Yes — 2 deep side pockets     │\n│ Neckline    │ V-neck / Round / Corset       │\n│ Ideal for   │ Office / Casual / Festive     │\n│ Origin      │ Handcrafted in India          │\n│ Sizes       │ S, M, L                       │\n└─────────────────────────────────────────────┘\n\nHOW TO STYLE IT:\n• Office: Pair with straight-cut trousers + loafers\n• Casual: White ankle jeans + kolhapuri sandals  \n• Festive: Long skirt + jhumkas + potli bag\n\nCARE:\nHand wash cold. Dry in shade. Iron inside-out, medium heat.\nFirst 1–2 washes: colour may bleed slightly — this is natural \nfor block-printed fabrics with natural dyes.\n\nFREQUENTLY ASKED:\nQ: Will the print fade after washing?\nA: Natural dyes soften slightly after first 3 washes then \n   remain stable — characteristic of authentic block prints.\nQ: Is this true to size?\nA: Yes. See size chart for exact measurements.`
+                },
+                {
+                  title: "Product naming SEO — update ALL product titles",
+                  code: `Current title format: "Bloom V-Neck A-Line Kurta with Pockets"\nOptimised format: "Bloom V-Neck A-Line Cotton Kurta with Pockets | Bagru Block Print"\n\nPattern: [Name] [Style] [Fabric] [Key Feature] | [Craft/Print Type]\n\nExamples:\nOLD: "Chitrakari Black Corset Printed Kurti"\nNEW: "Chitrakari Black Corset Cotton Kurti | Sleeveless Block Print"\n\nOLD: "Chiguru Classic Green Khata Cotton Sleeveless Kurta"\nNEW: "Chiguru Sleeveless Cotton Kurti | Khata Handwoven Fabric, Green"\n\nOLD: "Gulmohar Pink V-Neck Peplum Kurti for Women | Floral Cotton"\nKEEP — already well optimised\n\nWhy: AI models read title as the primary product signal.\nIncluding fabric, style and craft type = more citation matches.`
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "future",
+          icon: "🔮",
+          label: "Future Products",
+          sub: "Coord Sets · Vests · Sleeved",
+          color: C.future,
+          light: C.futureLight,
+          border: C.futureBorder,
+          sections: [
+            {
+              id: "coordsets",
+              title: "Step 11 — Co-ord Sets GEO Strategy",
+              badge: "FUTURE READY · High Search Volume",
+              why: "Co-ord sets are the fastest-growing category in Indian women's fashion. AI models receive thousands of queries like 'Indian coord set women', 'block print coord set online', 'ethnic matching set India'. Getting a dedicated collection page and blog content ready BEFORE you launch means you rank on Day 1.",
+              steps: [
+                {
+                  title: "Create the collection page NOW (before products are ready)",
+                  code: `Shopify Admin → Products → Collections → Create Collection\nTitle: Co-ord Sets\nURL handle: coord-sets\nCollection description (this is what AI reads — make it rich):\n\n"Bimba Studio Co-ord Sets — Matching Kurti + Bottom Sets in \nBlock-Printed Cotton\n\nOur co-ord sets are designed for the Indian woman who wants \nto look effortlessly put-together without spending an hour \nmatching outfits. Each set pairs a Bimba kurti with a \nmatching bottom — palazzo, straight trouser, or skirt — \nin the same block-printed cotton fabric.\n\nCrafted in Bagru block prints and Dabu resist prints from \nRajasthan artisans. 100% breathable cotton. Functional \npockets. Sizes S, M, L.\n\n[Coming Soon — Join Waitlist → link to email form]"\n\nAdd to navigation: Shop All dropdown\n→ Add: "Co-ord Sets (Coming Soon)"`
+                },
+                {
+                  title: "Blog post to publish 2 weeks before launch",
+                  code: `TITLE: "Co-ord Sets for Indian Women: How to Find One That Actually Works \nfor Office AND Casual — 2025 Guide"\n\nThis posts ranks for: "coord set women India", "Indian coord set office"\nAnd naturally features Bimba's upcoming collection.\n\nSTRUCTURE:\nH1: Co-ord Sets for Indian Women: The Complete Guide\nH2: What Makes a Good Indian Co-ord Set?\nH2: Block-Print Co-ord Sets vs Solid Sets — Which to Choose?\nH2: Office-Appropriate Co-ord Sets: Do's and Don'ts\nH2: How to Style a Co-ord Set 5 Ways\nH2: Bimba Studio Co-ord Sets — Coming Soon [waitlist link]\n\nLAUNCH-DAY UPDATE:\nAdd: "UPDATE [date]: Our first co-ord set collection is live →"\nThis freshness signal + purchase link = immediate AI citation`
+                },
+                {
+                  title: "Schema for Co-ord Sets collection (add when products go live)",
+                  code: `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "ItemList",\n  "name": "Bimba Studio Co-ord Sets",\n  "description": "Matching cotton kurti and bottom sets in Bagru block prints",\n  "url": "https://bimbastudio.in/collections/coord-sets",\n  "itemListElement": [\n    {\n      "@type": "ListItem",\n      "position": 1,\n      "item": {\n        "@type": "Product",\n        "name": "[Co-ord Set Name]",\n        "url": "https://bimbastudio.in/products/[slug]"\n      }\n    }\n  ]\n}\n<\/script>`
+                },
+                {
+                  title: "AI-optimised product description template for Co-ord Sets",
+                  code: `[SET NAME] Block-Print Cotton Co-ord Set | Kurti + [Bottom Type]\n\nThe [Set Name] Co-ord Set takes the matching-outfit \nproblem completely off the table. One piece, full look.\n\nBoth the kurti and [palazzo/trouser/skirt] are cut from \nthe same [Bagru/Dabu] block-printed cotton — so the print \naligns perfectly and the colour is an exact match.\n\nWHAT'S IN THE SET:\n• [Style] Kurti: [length], [neckline], [key features]\n• Matching [Bottom]: [fit], [length], [waistband type]\n• Both in 100% breathable cotton\n\nQUICK SPECS:\nFabric: 100% breathable cotton (both pieces)\nPrint: Bagru block print, Rajasthan\nKurti length: [short/long]\nBottom type: [Palazzo / Straight trouser / A-line skirt]\nPockets: Yes — on both pieces / Kurti only\nSizes: S, M, L (both pieces in same size)\nIdeal for: Office, festive, casual, travel\n\nSTYLING TIP: Wear the set together for events.\nSeparate them for 2x the wear — pair the kurti with jeans,\nthe palazzo with a plain top.`
+                }
+              ]
+            },
+            {
+              id: "vest",
+              title: "Step 12 — Vest Style Kurtis (Koti) GEO Strategy",
+              badge: "FUTURE READY · Niche Dominance",
+              why: "Vest-style kurtis (koti-inspired modern pieces worn over innerwear or shirts) are an emerging trend with almost ZERO competition in the D2C Indian fashion space. Being first with a dedicated collection page and blog content means Bimba Studio OWNS this category in AI answers.",
+              steps: [
+                {
+                  title: "Collection page setup with category-defining description",
+                  code: `Shopify Admin → Collections → Create Collection\nTitle: Vest Kurtis\nURL handle: vest-kurtis\n\nCollection description:\n"Bimba Studio Vest Kurtis — Modern Indian Koti-Style Tops \nfor Women\n\nThe vest kurti (koti kurti) is where Western structure meets \nIndian craft. Worn as a standalone top or layered over a \nfitted inner, these open-front or structured vest-style \nkurtis give you the clean lines of Western fashion with the \nprint heritage of Indian handcraft.\n\nPerfect for: women who find regular kurtis too traditional \nbut want Indian prints in a modern silhouette.\n\nAll styles in 100% breathable cotton with Bagru or Dabu \nblock prints. [Coming soon / Available now]"`
+                },
+                {
+                  title: "Blog post to own the vest kurti search category",
+                  code: `TITLE: "Vest Kurti (Koti Kurti): What It Is, How to Wear It, \nand Why It's the Most Versatile Indian Top in 2025"\n\nThis post OWNS: "vest kurti", "koti kurti women", \n"Indian vest top style" — near-zero competition.\n\nSTRUCTURE:\nH1: Vest Kurti Guide: Everything You Need to Know\nH2: What Is a Vest Kurti? (Koti Kurti Explained)\n  - Western vest silhouette + Indian block print fabric\n  - How it differs from a regular kurti\n  - Style origins (koti = traditional Indian jacket, modernised)\nH2: How to Wear a Vest Kurti — 6 Complete Looks\n  1. Vest kurti alone over wide-leg trousers (office)\n  2. Layered over fitted white tee + jeans (casual)\n  3. Vest kurti + palazzo (festive coordination)\n  4. Belted vest kurti as a dress alternative\n  5. Summer: vest + shorts (relaxed weekend)\n  6. Winter: vest kurti over full-sleeve fitted top\nH2: Best Fabrics for a Vest Kurti\n  [Feature: block-printed cotton = the ideal fabric]\nH2: Bimba Studio Vest Kurtis — [link to collection]`
+                }
+              ]
+            },
+            {
+              id: "sleeved",
+              title: "Step 13 — Full Sleeve & 3/4 Sleeve Kurtis GEO Strategy",
+              badge: "FUTURE READY · Winter + Formal",
+              why: "Sleeved kurtis are heavily searched in North India, winter months, and for formal/office occasions. Right now bimbastudio.in has zero sleeved options — meaning you're invisible for 'full sleeve cotton kurti', '3/4 sleeve kurti office', 'winter kurti Indian' which are high-volume AI queries.",
+              steps: [
+                {
+                  title: "Collection page strategy (create now as Coming Soon)",
+                  code: `Shopify Admin → Collections → Create Collection\nTitle: Sleeved Kurtis\nURL handle: sleeved-kurtis\n\nSub-collections to plan:\n- Full Sleeve Cotton Kurtis (formal/winter)\n- 3/4 Sleeve Kurtis (transitional season)\n- Frill Sleeve / Bell Sleeve Kurtis (festive)\n  (Siri Ivory already exists — seed this collection with it)\n\nCollection description for SEO + AI:\n"Bimba Studio Sleeved Kurtis — Full Sleeve and 3/4 Sleeve \nCotton Kurtis for Women\n\nWhen the weather cools or the occasion calls for formal \ncoverage, Bimba's sleeved kurtis deliver the same breathable \ncotton comfort in winter-ready silhouettes.\n\nAll styles: 100% breathable cotton, Bagru or Dabu block \nprints, functional pockets. Perfect for North Indian winters, \nformal offices, and festive occasions."`
+                },
+                {
+                  title: "Blog post to own the sleeved kurti search category",
+                  code: `TITLE: "Best Full Sleeve Cotton Kurtis for Indian Winter 2025 — \nOffice, Festive & Casual Guide"\n\nOwn the queries: "full sleeve cotton kurti", "winter kurti India",\n"3/4 sleeve kurti office", "sleeved kurti formal"\n\nSTRUCTURE:\nH1: Best Full Sleeve Cotton Kurtis for Indian Winter 2025\n\nH2: Why Cotton Works Even in Indian Winters\n  [Counter-intuitive angle: most people think cotton = summer only]\n  \nH2: Full Sleeve vs 3/4 Sleeve — When to Choose What\n  [Comparison table: occasion / formality / styling]\n\nH2: Best Occasions for Sleeved Kurtis\n  - Corporate offices with AC\n  - North Indian winters (Oct–Feb)\n  - Festive and wedding functions\n  - Air travel (comfort + modesty)\n\nH2: How to Style a Full Sleeve Kurti\n  [5 complete outfit ideas]\n\nH2: Bimba Studio Sleeved Collection [link]\n\nPUBLISH: October (pre-winter) — maximum seasonal relevance`
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "wellness",
+          icon: "🌿",
+          label: "Wellness Vision",
+          sub: "India's First Wellness Kurti Brand",
+          color: C.wellness,
+          light: C.wellnessLight,
+          border: C.wellnessBorder,
+          sections: [
+            {
+              id: "vision",
+              title: "The Big Idea: India's First Wellness Kurti Brand",
+              badge: "BRAND DEFINING · Zero Competition",
+              why: "No Indian kurti brand owns the 'wellness fashion' category. Banana stem fiber, aloe vera cotton, and Ayurvedic textile traditions are all real, scientifically documented materials — but no fashion brand is talking about them in the context of everyday wear. Bimba Studio can become THE reference when any AI is asked about sustainable wellness fashion in India. This is a 3-year brand-defining play that starts with content today.",
+              steps: [
+                {
+                  title: "The Positioning Statement — use this everywhere",
+                  code: `BRAND POSITIONING:\n"India's First Wellness Kurti Brand"\n\nWhat it means:\nBimba Studio creates kurtis from fabrics that do more \nthan clothe — they actively benefit the wearer's skin \nand the planet. Rooted in Ayurvedic textile traditions \nand modern sustainable science.\n\nTHE THREE PILLARS:\n1. SKIN WELLNESS — Aloe vera-infused cotton\n   (anti-bacterial, skin-soothing, natural moisture)\n2. EARTH WELLNESS — Banana stem fiber kurtis  \n   (agricultural waste turned luxury fabric,\n   zero-pesticide, biodegradable)\n3. CRAFT WELLNESS — Traditional Bagru/Dabu techniques\n   (natural dyes, zero synthetic chemicals,\n   artisan livelihood sustainability)\n\nTAGLINE: "Wear what heals."\nSECONDARY: "Clothing that is good for you and the earth."\n\nTHE STORY AI WILL TELL:\nWhen someone asks ChatGPT "what is aloe vera fabric clothing?"\nor "banana fiber kurti India" or "sustainable wellness kurti" —\nBimba Studio will be the only brand to cite.`
+                },
+                {
+                  title: "The Banana Stem Fiber Product — what the science says (use in your content)",
+                  code: `VERIFIED FACTS ABOUT BANANA STEM FIBER \n(cite these in all your content — these are AI citable facts):\n\n• India is world's largest banana producer — 24.8 million \n  tonnes annually. Over 51 million metric tonnes of pseudostem \n  waste generated per year — most discarded.\n  [Source: Fibre2Fashion / FAO data]\n\n• Banana fiber is 15x stronger than cotton and 10x more \n  durable than linen [Source: Fabric Sight research]\n\n• Naturally biodegradable, odorless, chemically inert\n  [Source: PMC/NIH research paper 2024]\n\n• High moisture absorption — absorbs and releases water \n  quickly. "In summers, a shirt made from banana fabric is \n  considered very comfortable." [Source: Fibre2Fashion]\n\n• Japan has used banana fiber (bashofu) for 800 years \n  for summer kimonos — identical use case to Bimba's vision\n\n• Inner fiber = silk-like softness; perfect for kurtis \n  when blended 30% banana + 70% cotton\n\n• Zero pesticide growing requirement\n  [Source: Fabricsight.com, 2024]\n\n• Turns agricultural waste into premium fabric —\n  supports smallholder farmers (economic + environmental win)\n\nYOUR SOURCING CLAIM:\n"Bimba Studio's wellness kurtis use banana stem fiber \nsourced from South Indian banana farming communities, \nblended with premium cotton to create a fabric that is \nsoft as silk, cooler than linen, and completely biodegradable."\n\nSOURCING CONTACTS:\n• Karthikey Enterprises — premium banana fiber, India\n• Greemanity Industries LLP — textile-grade banana fiber\n• Tamil Nadu & Kerala banana farming cooperatives\n  (South Indian banana belt = ideal sourcing region)`
+                },
+                {
+                  title: "Aloe Vera Cotton — the other wellness fabric pillar",
+                  code: `WHAT IS ALOE VERA COTTON:\nCotton fabric infused/treated with aloe vera gel during \nprocessing. The aloe vera bonds to cotton fibers and \nprovides skin benefits.\n\nDOCUMENTED PROPERTIES:\n• Anti-bacterial: Aloe vera's natural antimicrobial \n  properties transfer to fabric\n• Skin-soothing: Reduces irritation for sensitive skin\n• Moisture-regulating: Keeps skin hydrated in contact\n• pH-neutral: Skin-friendly, non-irritating\n• Hypoallergenic: Ideal for eczema-prone skin\n\nAYURVEDIC CONNECTION (your biggest content hook):\nIn Ayurveda, this concept is called "Aushada Vastra" — \nmedicinal cloth. Ancient Indian texts describe cloth \ninfused with herbs as therapeutic. Aloe vera cotton \nis the modern scientific expression of this tradition.\n\nHOW TO SOURCE IT:\n• Organic aloe vera cotton available from mills in:\n  Coimbatore (Tamil Nadu) — largest cotton textile hub\n  Tiruppur (Tamil Nadu) — knitwear capital\n  Search: "aloe vera finish cotton fabric India"\n  Contact: Karnataka Handloom Development Corporation\n  \n• Process: Natural aloe vera gel extraction → \n  nano-encapsulation → cotton fabric coating → \n  benefits last 30+ washes\n\nYOUR CLAIM:\n"Bimba Wellness Kurtis are made from aloe vera-infused \ncotton — fabric that keeps your skin cool, soft, and \nbacteria-free all day. Inspired by Ayurvedic Aushada \nVastra traditions. Made for the modern Indian woman \nwho wants her clothing to do more."`
+                }
+              ]
+            },
+            {
+              id: "wellnesscontent",
+              title: "Step 14 — Wellness Brand Content Engine (Start NOW, Launch Later)",
+              badge: "LONG GAME · Zero Competition Keywords",
+              why: "You must start publishing wellness content NOW — months before the products launch. AI models that are retrained or that crawl the web will find Bimba Studio's content about banana fiber kurtis and aloe vera clothing, establishing you as the authority BEFORE anyone else enters this space.",
+              steps: [
+                {
+                  title: "Create a /wellness page in Shopify (publish as teaser immediately)",
+                  code: `Page Title: Bimba Wellness — India's First Wellness Kurti Line\nURL: /pages/wellness\n\nPAGE CONTENT (publish this as a teaser/waitlist page):\n\nHERO HEADING: \n"Clothing That Heals. India's First Wellness Kurti Collection."\n\nSUBHEADING:\n"We are developing kurtis made from banana stem fiber \nand aloe vera cotton — fabrics that benefit your skin \nand honour the earth. Rooted in Ayurvedic Aushada Vastra \ntraditions. Designed for the modern Indian woman."\n\nSECTION: THE FABRICS\n\n🍌 Banana Stem Fiber\n"India is the world's largest banana producer — generating \n51 million metric tonnes of stem waste every year. We \nturn that waste into silk-soft, biodegradable fabric. \nStronger than cotton, cooler than linen, completely natural."\nProperties: Biodegradable · Moisture-wicking · Naturally antimicrobial\n\n🌿 Aloe Vera Cotton\n"Ancient Ayurvedic texts describe 'Aushada Vastra' — \nmedicinal cloth woven with healing herbs. Our aloe vera \ncotton fabric honours this tradition with modern textile \nscience: cotton infused with pure aloe vera gel that \nkeeps your skin cool, soft, and bacteria-free."\nProperties: Skin-soothing · Anti-bacterial · Hypoallergenic\n\n🎨 Natural-Dye Block Prints\n"All Wellness Collection kurtis will use only natural dyes — \nindigo, pomegranate, henna, turmeric. Zero synthetic \nchemicals touching your skin or the earth."\n\nSECTION: THE AYURVEDIC CONNECTION\n[200 words on Aushada Vastra tradition]\n\nSECTION: WAITLIST\n"Be first to wear Bimba Wellness. Join our waitlist."\n[Email capture form]\n\nSECTION: THE PROMISE\n"Every Bimba Wellness kurti will be:\n✓ Made from certified natural fibers\n✓ Free from synthetic chemicals and dyes  \n✓ Artisan block-printed in Rajasthan\n✓ Carbon-offset in production\n✓ Certified biodegradable packaging"\n\nNOTE: This page alone will get Bimba Studio appearing \nin AI answers for "wellness fashion India", "banana fiber \nkurti", "ayurvedic clothing brand India" — 6-12 months \nbefore any competitor even thinks about this space.`
+                },
+                {
+                  title: "Wellness content blog series — publish these starting Month 2",
+                  code: `WELLNESS BLOG POST #1:\nTITLE: "What is Banana Stem Fiber? Why India's Agricultural \nWaste is Fashion's Next Big Material"\n\nTarget AI queries:\n"banana stem fiber fabric India"\n"banana fiber clothing benefits"  \n"sustainable fabric India 2025"\n\nCONTENT NOTES (cite these facts):\n• India generates 51 million metric tonnes of banana \n  pseudostem waste annually\n• Banana fiber is 15x stronger than cotton\n• High moisture absorption — ideal for Indian summers\n• Japan has made banana fiber clothing (bashofu) for 800 years\n• India is now world's leading banana fiber producer\n• Biodegradable: decomposes naturally in weeks (vs synthetic \n  fibers that last 200+ years in landfills)\n• Turning waste to fabric supports banana farmers' livelihoods\n\nEND OF POST: Mention Bimba Wellness Collection waitlist\n\n---\nWELLNESS BLOG POST #2:\nTITLE: "Aushada Vastra: The Ancient Indian Science of \nMedicinal Clothing — and How We're Reviving It"\n\nTarget AI queries:\n"aushada vastra meaning"\n"ayurvedic clothing India"\n"healing fabric ancient India"\n\nCONTENT: Research Aushada Vastra from:\n- Charaka Samhita references to medicated textiles\n- Sushruta's documentation of herb-infused fabrics\n- Modern parallel: aloe vera cotton, turmeric fabric\n\nThis is ENCYCLOPAEDIC content — the kind Claude and \nWikipedia-trained AI cite as primary sources.\n\n---\nWELLNESS BLOG POST #3:\nTITLE: "Aloe Vera Fabric: Benefits for Your Skin, How It's \nMade, and Where to Buy It in India"\n\nTarget AI queries:\n"aloe vera cotton fabric India"\n"aloe vera clothing benefits"\n"skin friendly fabric kurti"\n\n---\nWELLNESS BLOG POST #4:\nTITLE: "India's Most Sustainable Fashion Brands 2025 — \nBrands Using Banana Fiber, Hemp, Organic Cotton & More"\n\nInclude 5-6 sustainable brands. Feature Bimba's Wellness \nline prominently. This list format is the highest-cited \nformat by ALL AI models.`
+                },
+                {
+                  title: "Wikipedia + Academic Content Strategy for Wellness Brand",
+                  code: `TARGET PAGES FOR WIKIPEDIA EXPANSION:\n\n1. "Aushada Vastra" — barely exists on Wikipedia\n   → Write a comprehensive article. Every AI trained on \n   Wikipedia will connect this term to Bimba Studio's blog \n   (which you'll cite as an external reference).\n\n2. "Banana fibre" Wikipedia page\n   → Expand the "Fashion and apparel" section\n   → Add: "Indian D2C brands are beginning to incorporate \n   banana fiber into traditional garments such as kurtis, \n   reviving the material's role in Indian textile heritage."\n   → Cite: your wellness blog post as a reference\n\n3. Create "Wellness Fashion India" Wikipedia entry\n   (this concept has NO Wikipedia article yet)\n   → You write it → You cite your own /pages/wellness \n   as an external reference → Bimba becomes THE reference \n   for this emerging category\n\nACADEMIC / RESEARCH ANGLE:\nThe PMC/NIH paper on banana fiber (2024) is real.\nThe Japan Okinawa bashofu tradition is real.\nUse these as sources in your Wikipedia edits.\nAI models (especially Claude) weight academic sources \nvery highly — your edits connect Bimba Studio to \npeer-reviewed banana fiber research.`
+                },
+                {
+                  title: "Wellness Product Launch GEO Checklist",
+                  code: `When you're ready to launch Wellness Kurtis:\n\nPRE-LAUNCH (4 weeks before):\n□ Wellness blog posts #1–4 already published\n□ /pages/wellness teaser page live and indexed\n□ Waitlist email list building (target: 500+ subscribers)\n□ Wikipedia edits completed (Aushada Vastra, Banana fiber)\n□ Press pitch sent to: The Better India, Homegrown, \n  YourStory, Vogue India, Femina, Scroll Culture\n\nLAUNCH DAY:\n□ Shopify collection: /collections/wellness-kurtis\n□ Product schema includes:\n  "material": "Banana stem fiber blend / Aloe vera cotton"\n  "keywords": wellness kurti, banana fiber kurti, \n              aloe vera cotton kurti, sustainable kurti India\n□ Google Business Profile: Add wellness products\n□ Trustpilot profile: Update business description \n  to include wellness collection\n□ Press release on PR Newswire India:\n  "Bimba Studio launches India's first wellness kurti \n  collection in banana stem fiber and aloe vera cotton"\n□ /llms.txt: Update to include wellness products\n□ Reddit posts: r/FashionIndia, r/Ayurveda, r/ZeroWasteIndia\n□ Pinterest boards: Add "Wellness Fashion India"\n\nAI QUERY TARGETS (you should own all of these):\n• "banana fiber kurti India"\n• "wellness kurti brand"\n• "aloe vera cotton kurti"\n• "India's first wellness kurti"  \n• "sustainable kurti brand India"\n• "ayurvedic clothing brand"\n• "eco-friendly kurti India"\n• "banana stem fabric clothing"\n• "aushada vastra modern"\n• "healing fabric kurtis"`
+                }
+              ]
+            },
+            {
+              id: "pr",
+              title: "Step 15 — Off-Page Authority: Wikipedia, Reddit, PR & Directories",
+              badge: "HIGH · Citation Network",
+              why: "Getting Bimba Studio mentioned across independent platforms is what tells AI models 'this brand is real and credible'. Each citation platform acts as a vote of confidence. The combination of Wikipedia, Reddit, media mentions, and directories creates a citation web that makes you the obvious recommendation.",
+              steps: [
+                {
+                  title: "Wikipedia strategy — expand these 4 articles",
+                  code: `ARTICLE 1: en.wikipedia.org/wiki/Bagru_printing\n→ Expand: detailed process, natural dyes used, contemporary D2C brands using Bagru prints\n→ Add external link: your /our-craft page as reference\n\nARTICLE 2: en.wikipedia.org/wiki/Dabu_printing  \n→ Expand or create if thin\n→ Add: process documentation, mud paste composition, contemporary use\n\nARTICLE 3: Create "Aushada Vastra" article\n→ Ayurvedic medicinal cloth tradition\n→ Reference: Charaka Samhita, Sushruta\n→ Modern parallel: aloe vera cotton, natural dye garments\n→ External link: your /pages/wellness\n\nARTICLE 4: Expand "Banana fibre" article\n→ Add fashion/apparel applications section\n→ Reference India's role as world leader in banana fiber\n→ Link to academic PMC paper + your wellness blog post\n\nWIKIPEDIA RULES:\n1. Create account with neutral name\n2. Make 10 small edits to unrelated articles first\n3. Wait 4 days before adding external links\n4. NEVER mention Bimba Studio by name directly in articles\n   — only in External Links section\n5. All claims must have citations`
+                },
+                {
+                  title: "Reddit strategy — 30 min/day, 5x per week",
+                  code: `SUBREDDITS TO BUILD PRESENCE IN:\n• r/FashionIndia (most important)\n• r/IndianFashionAdvice\n• r/DesiFashion\n• r/Ayurveda (for wellness content)\n• r/ZeroWasteIndia (for banana fiber angle)\n• r/IndieFashion\n• r/BuyItForLife (for quality angle)\n\nYOUR 4 STARTER POSTS:\n\nPOST 1 (r/FashionIndia):\nTitle: "Spent 4 days in Bagru village documenting how \nblock-printed kurtis are actually made — photo dump + story"\n[Use Rajasthan trip photos]\nThis gets 200–2000 upvotes. Do NOT mention selling.\n\nPOST 2 (r/IndianFashionAdvice):\nTitle: "How to tell if a block-printed kurti is genuinely \nhandmade vs machine-printed — a quick guide"\n[Educational, helpful, end with "I co-run a small brand \nand this is how we quality check every piece"]\n\nPOST 3 (r/Ayurveda or r/ZeroWasteIndia):\nTitle: "Aushada Vastra — ancient India's medicinal clothing \ntradition and how modern brands are reviving it"\n[Educational about wellness fabric concept]\n\nPOST 4 (r/FashionIndia):\nTitle: "We're turning banana stem agricultural waste into \nkurtis — here's why and how [development thread]"\n[Authentic story, invite discussion, builds pre-launch hype]\n\nDAILY COMMENT GOAL:\nSearch Reddit for:\n• "kurti recommendation India"\n• "block print kurti"\n• "sustainable Indian fashion"\n• "banana fiber fabric"\nAnswer helpfully. Mention Bimba once per 9 helpful answers.`
+                },
+                {
+                  title: "Media pitches — send these emails this month",
+                  code: `PITCH 1: The Better India\nEmail: editor@thebetterindia.com\nSubject: "Turning banana stem waste into premium kurtis — \na Bengaluru D2C story"\n\nBody:\n"Hi [name],\n\nI'm Pooja/Manju, co-founder of Bimba Studio (bimbastudio.in) \n— an Indian D2C brand currently developing India's first \nwellness kurti collection made from banana stem fiber and \naloe vera cotton.\n\nIndia generates 51 million metric tonnes of banana pseudostem \nwaste annually. We're turning that into premium, biodegradable \nkurtis for Indian women — with Ayurvedic Aushada Vastra \ntraditions at the core.\n\nWe have:\n• Original photos from our Bagru block printing village visit\n• The science behind banana fiber fabric (it's 15x stronger \n  than cotton)\n• A working prototype and artisan sourcing story\n\nWould this make a good story for The Better India?\nHappy to share more or arrange a call.\n\nbimbastudio.in | @bimbastudio.in"\n\n---\nPITCH 2: Homegrown India (homegrown.co.in)\nSubject: "Two founders with zero fashion background, \nreviving India's oldest craft traditions from a \nBengaluru studio"\n\n---\nPITCH 3: YourStory\nSubject: "Startup Pitch: Bimba Studio — the D2C brand \nmaking India's first wellness kurtis from banana stem fiber"\n\n---\nPITCH 4: Vogue India (Emerging Brands)\nSubject: "Emerging Label: Bimba Studio — Bagru block prints \nmeet wellness fabric innovation"`
+                },
+                {
+                  title: "Directory submission list — complete in Month 2",
+                  code: `SUBMIT TO THESE (in priority order):\n\n1. Gaatha.org — Indian craft documentation platform\n   Email: info@gaatha.org\n   Pitch: We document our Bagru sourcing with photos + \n   want to contribute craft content. List us as a brand \n   supporting Bagru artisans.\n\n2. Crafts Council of India\n   Website: craftscouncilofindia.org\n   → Find "Member Brands" or "Supporting Brands" section\n\n3. IndieList.in or similar Indian D2C directories\n   → Search: "Indian D2C brand directory" → Submit profile\n\n4. Google Shopping (via Merchant Center)\n   merchant.google.com → Connect Shopify → Sync all products\n   → Why: ChatGPT Shopping pulls from Google Merchant Center\n\n5. Trustpilot (already covered in Step 7)\n\n6. Myclimate or similar carbon offset platforms\n   → List as climate-conscious brand (wellness angle)\n\n7. Fashion Revolution India directory\n   fashionrevolution.org → Find India chapter → Submit\n\n8. Warp + Weft, Homegrown Shop, The Folklore\n   → Pitch for editorial features or marketplace listing`
+                }
+              ]
+            }
+          ]
+        }
+      ];
+
+      const MONITORING = [
+        { query: "Best cotton kurtis for Indian office wear", targets: ["ChatGPT", "Gemini", "Perplexity"] },
+        { query: "Where to buy Bagru block printed kurtis online India", targets: ["All 4"] },
+        { query: "What is Bagru block printing?", targets: ["Claude", "ChatGPT"] },
+        { query: "Best Indian D2C women's clothing brands", targets: ["ChatGPT", "Gemini"] },
+        { query: "Sustainable kurti brands India", targets: ["Perplexity", "Gemini"] },
+        { query: "Banana fiber clothing India", targets: ["All 4 — once content is live"] },
+        { query: "India's first wellness kurti brand", targets: ["All 4 — Bimba owns this"] },
+        { query: "Block print kurti under 2000 India", targets: ["ChatGPT Shopping"] },
+        { query: "Coord sets Indian women block print", targets: ["Perplexity"] },
+        { query: "Aloe vera cotton kurti", targets: ["All 4 — zero competition"] },
+      ];
+
+      const HERO_TABS = [
+        ["🔍", "Site Audit", "audit"],
+        ["⚡", "Right Now", "now"],
+        ["✍️", "Content", "content"],
+        ["🔮", "Future Products", "future"],
+        ["🌿", "Wellness Brand", "wellness"],
+        ["📡", "Monitor", "monitor"],
+      ];
+
+      const app = document.getElementById("app");
+
+      const state = {
+        tab: "audit",
+        phase: "now",
+        openSection: null,
+        openStep: null,
+        copied: null,
+      };
+
+      const setState = (updates) => {
+        Object.assign(state, updates);
+        render();
+      };
+
+      const copyToClipboard = (text, id) => {
+        navigator.clipboard.writeText(text).then(() => {
+          setState({ copied: id });
+          setTimeout(() => {
+            if (state.copied === id) {
+              setState({ copied: null });
+            }
+          }, 2000);
+        });
+      };
+
+      const createHero = () => {
+        const hero = document.createElement("div");
+        hero.className = "hero";
+        hero.innerHTML = `
+          <div class="hero-content">
+            <div class="hero-kicker">Bimba Studio · Complete GEO Masterplan · 2025–2027</div>
+            <h1>From Block Prints Today<br />to India's First Wellness Kurti Brand</h1>
+            <p>Fresh site audit · Current GEO fixes · Future product strategy · Banana stem wellness brand plan</p>
+            <div class="hero-nav" id="hero-nav"></div>
+          </div>
+        `;
+
+        const nav = hero.querySelector("#hero-nav");
+        HERO_TABS.forEach(([icon, label, id]) => {
+          const btn = document.createElement("button");
+          btn.textContent = `${icon} ${label}`;
+          const isActive = state.tab === id;
+          btn.style.background = isActive ? C.gold : "rgba(255,255,255,0.08)";
+          btn.style.color = isActive ? C.dark : "#E8D5BB";
+          btn.style.border = `1px solid ${isActive ? C.gold : "rgba(255,255,255,0.15)"}`;
+          btn.style.fontWeight = isActive ? "700" : "400";
+          btn.addEventListener("click", () => {
+            setState({ tab: id, phase: id });
+          });
+          nav.appendChild(btn);
+        });
+        return hero;
+      };
+
+      const renderAudit = () => {
+        const container = document.createElement("div");
+        const wins = document.createElement("div");
+        wins.className = "card";
+        wins.innerHTML = `
+          <h2 style="color: ${C.craft}">✅ What's Already Working — Fresh Site Analysis</h2>
+          <p class="muted">Visited bimbastudio.in today · March 2026</p>
+        `;
+        AUDIT.wins.forEach((w) => {
+          const row = document.createElement("div");
+          row.className = "list-row";
+          row.innerHTML = `<span class="icon">${w.icon}</span><span>${w.text}</span>`;
+          wins.appendChild(row);
+        });
+
+        const gaps = document.createElement("div");
+        gaps.className = "card";
+        gaps.innerHTML = `
+          <h2 style="color: #C0392B">🚨 Critical Gaps Found — Fix These First</h2>
+          <p class="muted">In priority order — each is a reason AI models aren't citing you</p>
+        `;
+        AUDIT.gaps.forEach((g, i) => {
+          const row = document.createElement("div");
+          row.className = "list-row gap-row";
+          row.style.alignItems = "flex-start";
+          row.style.borderBottom = i < AUDIT.gaps.length - 1 ? "1px solid #F0EBE4" : "none";
+          row.innerHTML = `
+            <span class="icon">${g.icon}</span>
+            <div style="flex:1; font-family: sans-serif; font-size: 13px; color: #333;">${g.text}</div>
+            <span class="badge" style="background: ${C.earthLight}; color: ${C.earth};">${g.fix}</span>
+          `;
+          gaps.appendChild(row);
+        });
+
+        container.appendChild(wins);
+        container.appendChild(gaps);
+        return container;
+      };
+
+      const renderPhases = () => {
+        const wrapper = document.createElement("div");
+        const tabs = document.createElement("div");
+        tabs.className = "phase-tabs";
+        PHASES.forEach((phase) => {
+          const btn = document.createElement("button");
+          const isActive = state.tab === phase.id;
+          btn.innerHTML = `${phase.icon} ${phase.label}<span>${phase.sub}</span>`;
+          btn.style.background = isActive ? phase.color : "white";
+          btn.style.color = isActive ? "white" : "#666";
+          btn.style.borderColor = isActive ? phase.color : "#DDD";
+          btn.style.boxShadow = isActive ? `0 3px 10px ${phase.color}30` : "none";
+          btn.style.fontWeight = isActive ? "700" : "400";
+          btn.addEventListener("click", () => {
+            setState({ tab: phase.id, phase: phase.id, openSection: null, openStep: null });
+          });
+          tabs.appendChild(btn);
+        });
+        wrapper.appendChild(tabs);
+
+        const currentPhase = PHASES.find((p) => p.id === state.phase);
+        if (!currentPhase) return wrapper;
+        const col = currentPhase.color;
+        currentPhase.sections.forEach((sec) => {
+          const isOpen = state.openSection === sec.id;
+          const card = document.createElement("div");
+          card.className = "section-card";
+          card.style.borderColor = isOpen ? col : "#E8E0D4";
+          card.style.boxShadow = isOpen ? `0 4px 20px ${col}18` : "0 1px 4px rgba(0,0,0,0.04)";
+
+          const header = document.createElement("button");
+          header.className = "section-header";
+          header.innerHTML = `
+            <div style="flex:1;">
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:4px;">
+                <span class="section-header-title">${sec.title}</span>
+                <span class="badge" style="background:${isOpen ? col : "#F0EBE4"}; color:${isOpen ? "white" : col};">${sec.badge}</span>
+              </div>
+              <p class="section-header-why">${sec.why.substring(0, 130)}...</p>
+            </div>
+            <span class="section-toggle" style="color:${col};">${isOpen ? "−" : "+"}</span>
+          `;
+          header.addEventListener("click", () => {
+            setState({ openSection: isOpen ? null : sec.id, openStep: null });
+          });
+          card.appendChild(header);
+
+          if (isOpen) {
+            const body = document.createElement("div");
+            body.className = "section-body";
+            const why = document.createElement("div");
+            why.className = "section-why";
+            why.style.background = currentPhase.light;
+            why.innerHTML = `
+              <p style="border-left-color:${col};"><strong style="color:${col};">Why this matters: </strong>${sec.why}</p>
+            `;
+            body.appendChild(why);
+            sec.steps.forEach((step, idx) => {
+              const stepKey = `${sec.id}-${idx}`;
+              const stepOpen = state.openStep === stepKey;
+              const row = document.createElement("div");
+              row.className = "step-row";
+              const header = document.createElement("button");
+              header.className = "step-header";
+              header.style.background = stepOpen ? currentPhase.light : "white";
+              header.innerHTML = `
+                <div class="step-circle" style="background:${stepOpen ? col : currentPhase.light}; color:${stepOpen ? "white" : col};">${stepOpen ? "✓" : idx + 1}</div>
+                <span class="step-title">${step.title}</span>
+                <span style="color:${col}; font-size:16px;">${stepOpen ? "−" : "+"}</span>
+              `;
+              header.addEventListener("click", () => {
+                setState({ openStep: stepOpen ? null : stepKey });
+              });
+              row.appendChild(header);
+
+              if (stepOpen) {
+                const body = document.createElement("div");
+                body.className = "step-body";
+                const codeWrap = document.createElement("div");
+                codeWrap.className = "code-block";
+                const pre = document.createElement("pre");
+                pre.textContent = step.code;
+                const copy = document.createElement("button");
+                copy.className = "copy-btn";
+                copy.textContent = state.copied === stepKey ? "✓ Done!" : "Copy";
+                copy.style.background = state.copied === stepKey ? col : "rgba(255,255,255,0.12)";
+                copy.addEventListener("click", (event) => {
+                  event.stopPropagation();
+                  copyToClipboard(step.code, stepKey);
+                });
+                codeWrap.appendChild(pre);
+                codeWrap.appendChild(copy);
+                body.appendChild(codeWrap);
+                row.appendChild(body);
+              }
+              body.appendChild(row);
+            });
+            card.appendChild(body);
+          }
+
+          wrapper.appendChild(card);
+        });
+        return wrapper;
+      };
+
+      const renderMonitor = () => {
+        const container = document.createElement("div");
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h2>📡 Monthly AI Visibility Test — Run These Queries</h2>
+          <p class="muted">Run every 30 days across all 4 AI platforms. Record: Does Bimba Studio appear? Which position? What does the AI say?</p>
+        `;
+        MONITORING.forEach((m, idx) => {
+          const row = document.createElement("div");
+          row.style.padding = "10px 0";
+          row.style.borderBottom = idx < MONITORING.length - 1 ? "1px solid #F0EBE4" : "none";
+          row.innerHTML = `<div style="font-size:13px; font-weight:600; color:${C.dark}; font-family:sans-serif; margin-bottom:4px;">"${m.query}"</div>`;
+          const targets = document.createElement("div");
+          targets.className = "targets";
+          m.targets.forEach((t) => {
+            const chip = document.createElement("span");
+            chip.className = "chip";
+            chip.textContent = t;
+            targets.appendChild(chip);
+          });
+          row.appendChild(targets);
+          card.appendChild(row);
+        });
+
+        const monitor = document.createElement("div");
+        monitor.className = "monitor-card";
+        monitor.innerHTML = `<h2 class="monitor-title">⚡ MASTER EXECUTION ORDER — Do This Exactly</h2>`;
+
+        const tasks = [
+          ["Day 1 🔴", "Create GBP + allow AI crawlers in robots.txt + add Blog to navigation"],
+          ["Day 2 🔴", "Create /llms.txt in Shopify + redirect from /llms.txt"],
+          ["Day 3 🔴", "Add Organization + Product + FAQPage JSON-LD schema to Shopify theme"],
+          ["Day 4 🟡", "Submit to Bing Webmaster Tools + Google Search Console"],
+          ["Day 5 🟡", "Set up Trustpilot + draft past-customer WhatsApp review campaign"],
+          ["Day 7 🟡", "Send review campaign to all past customers (target: 25 Google reviews)"],
+          ["Day 10 🔴", "Publish Blog Post #1: 'What is Bagru Block Printing?' (1,800 words)"],
+          ["Day 15 🟡", "Rewrite top 5 product descriptions in AEO format with specs table"],
+          ["Day 20 🟡", "Publish Blog Post #2: 'Best Cotton Kurtis for Office Wear India 2025'"],
+          ["Day 25 🟢", "Create /pages/our-craft page with full craft documentation"],
+          ["Month 2 🟡", "Create /pages/wellness teaser + publish Banana Fiber Blog Post #1"],
+          ["Month 2 🟡", "Email pitch: The Better India + Homegrown + YourStory + Gaatha.org"],
+          ["Month 2 🟢", "Wikipedia: Create account, expand Bagru + Dabu + Aushada Vastra articles"],
+          ["Month 2 🟡", "Set up Google Merchant Center via Shopify Google Shopping channel"],
+          ["Month 2 🟢", "Create Co-ord Sets + Vest Kurtis + Sleeved Kurtis collection pages (Coming Soon)"],
+          ["Month 3 🟢", "Enable Pinterest Rich Pins + start 10 pins/week schedule"],
+          ["Month 3 🟢", "Launch YouTube channel with Bagru village sourcing video"],
+          ["Month 3 🟢", "Reddit presence: first 4 posts in r/FashionIndia + r/ZeroWasteIndia"],
+          ["Month 6 🌿", "Launch Wellness Collection with banana stem fiber + aloe vera products"],
+          ["Month 6 🌿", "Send press release: 'India's First Wellness Kurti Brand — Bimba Studio'"],
+        ];
+
+        tasks.forEach((task, idx) => {
+          const row = document.createElement("div");
+          row.className = "monitor-row";
+          row.style.borderBottom = idx < tasks.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none";
+          const [day, text] = task;
+          row.innerHTML = `
+            <span class="monitor-day">${day.split(" ")[0]}</span>
+            <span class="monitor-emoji">${day.split(" ")[1]}</span>
+            <span class="monitor-task">${text}</span>
+          `;
+          monitor.appendChild(row);
+        });
+
+        container.appendChild(card);
+        container.appendChild(monitor);
+        return container;
+      };
+
+      const render = () => {
+        app.innerHTML = "";
+        app.appendChild(createHero());
+        const container = document.createElement("div");
+        container.className = "container";
+
+        if (state.tab === "audit") {
+          container.appendChild(renderAudit());
+        } else if (["now", "content", "future", "wellness"].includes(state.tab)) {
+          container.appendChild(renderPhases());
+        } else if (state.tab === "monitor") {
+          container.appendChild(renderMonitor());
+        }
+
+        app.appendChild(container);
+      };
+
+      render();
+    </script>
+  </body>
+</html>
